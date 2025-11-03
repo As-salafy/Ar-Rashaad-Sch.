@@ -1,0 +1,407 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+nav{
+    position: fixed;
+    background-color: gray;
+    height: 70px;
+    width: 100%;
+    z-index: 1;
+}
+
+.logo{
+    font-size: 25px;
+    position: relative;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    left: 5%;
+    /* gradient text - the actual color is provided by the background gradient */
+    color: white; /* fallback for older browsers */
+    font-weight: bold;
+    line-height: 70px;
+    /* typing animation (loops): type -> pause -> erase -> repeat */
+    overflow: hidden;             /* hide overflowing text while typing */
+    white-space: nowrap;          /* keep text on a single line */
+    display: inline-block;        /* allow width animation */
+    box-sizing: content-box;
+    /* caret removed: no border-right so no line appears behind the text */
+    width: 0ch;                   /* start hidden */
+    max-width: 30ch;              /* maximum revealed characters (adjust if needed) */
+    /*
+       animation breakdown:
+       - typing runs as steps to produce a character-by-character effect
+       - total cycle = 10s (type ~2.5s, pause ~3.5s, erase ~4s)
+       - change `18` in steps(...) and keyframes to match your logo character count
+    */
+    /* background gradient clipped to text */
+    background-image: linear-gradient(90deg, #88b8ef, #093eea 40%, #a8bdc0 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* hide the real text color so gradient shows through */
+
+    /* add a slow gradient shift animation alongside typing */
+    animation: typing 7s steps(18,end) 0.5s infinite, gradientShift 6s ease-in-out infinite;
+}
+
+ul{
+    position: relative;
+    float: right;
+    margin-right: 20px;
+}
+
+ul li {
+    display: inline-block;
+    line-height: 70px;
+    margin: 0 5px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+
+}
+
+.main_img{
+    width: 100%;
+    height: 300px !important;
+}
+
+.section1{
+    padding-top: 30px;
+}
+
+.img_text {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    color: white;
+    background-color: #466dc7;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-right: 20px;
+    padding-left: 10px;
+    font-size: 29px;
+}
+
+.welcome_img{
+    width: 100%;
+    height: 250px;
+}
+
+.container {
+    padding-top: 70px;
+}
+
+.teacher{
+    width: 90%;
+    height: 200px;
+}
+
+.label_text{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.input_deg{
+    width: 30%;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid gray;
+}
+
+.adm_int{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.input_txt{
+    width: 30%;
+    height: 120px;
+    border-radius: 20px;
+    border: 1px solid gray;
+}
+
+#submit{
+    position: relative;
+    width: 15%;
+    left: 5%;
+}
+
+.admn{
+    padding-top: 10px;
+}
+
+footer {
+    background-color: gray;
+    height: 70px;
+    width: 100%;
+    bottom: 0;
+}
+
+.footer_text{
+    text-align: center;
+    color: white;
+    top: 20%;
+    position: relative;
+}
+
+.adm{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+
+/* typing keyframes for .logo */
+@keyframes typing {
+    /* 0% -> 25% : type in (approx 2.5s)
+       25% -> 60%: hold full text (pause)
+       60% -> 100%: erase back to 0 (approx 4s)
+    */
+    0%   { width: 0ch; }
+    25%  { width: 18ch; }
+    60%  { width: 18ch; }
+    100% { width: 0ch; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgba(255,255,255,0.9); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Responsive tweaks for tablets and phones */
+/* Make images scale and remove fixed heights so they adapt to width */
+.main_img,
+.welcome_img,
+.teacher {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+/* Make form inputs easier to use on small screens */
+.input_deg,
+.input_txt,
+#submit {
+    width: 30%; /* default for desktop remains; overwritten in media queries */
+}
+
+/* Desktop: ensure nav items align nicely using flex */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+nav ul{
+    display: flex;
+    gap: .5rem;
+    margin: 0;
+        height: auto; /* allow height to grow */
+        /* remove fixed height so stacked menu doesn't overflow */
+        min-height: 0;
+
+
+
+/* Tablet/smaller desktop */
+@media (max-width: 992px) {
+    .logo { font-size: 22px; }
+    .img_text { left: 20%; font-size: 28px; }
+    .container { padding-top: 40px; }
+}
+
+/* Mobile phones */
+@media (max-width: 992px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        height: auto; /* allow height to grow */
+        padding: 10px 12px;
+    }
+
+    .logo{
+        left: 0;
+        font-size: 20px;
+        line-height: normal;
+        margin: 0;
+        display: block;
+        width: 100%;
+    }
+
+    /* hide menu by default on tablets/phones; toggle shows a horizontal, scrollable menu
+       animate open/close with slide + fade using max-height + opacity + transform
+    */
+    ul{
+        position: static;
+        float: none;
+        margin-right: 0;
+        display: flex; /* keep flex so items can be a row when open */
+        width: 100%;
+        justify-content: flex-start;
+        padding: 0;
+        flex-direction: row;
+        gap: 8px;
+        overflow: hidden; /* hide when closed */
+
+        /* animation start (closed)
+           - max-height controls visible area; set to 0 when closed
+           - opacity and transform for fade+slide
+        */
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: max-height 320ms ease, opacity 260ms ease, transform 260ms ease;
+    }
+
+    /* show toggle button on tablets and smaller */
+    #navToggle{ display: inline-block; }
+
+    /* position the toggle to the right of the logo */
+    #navToggle { order: 2; margin-left: auto; background-color: rgba(255,255,255,0.06); border-radius: 50%; padding: 6px 10px; }
+    .logo { order: 1; }
+    nav ul { order: 3; }
+
+    /* opened state: expand the max-height and reveal with opacity/transform */
+    ul.open {
+        overflow-x: auto; /* allow horizontal scroll if items overflow */
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        padding: 8px 0;
+        max-height: 80px; /* enough to show a single row of items */
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* menu item appearance for horizontal row */
+    ul.open li { display: inline-block; margin: 0 6px; }
+    ul.open li a { display: inline-block; padding: 8px 12px; }
+
+    /* make menu items easy to tap when stacked */
+    ul.open li { margin: 0; }
+    ul.open li a { display: block; padding: 10px 12px; }
+
+    .img_text{
+        left: 8%;
+        top: 12%;
+        font-size: 22px;
+        padding: 10px;
+    }
+
+    .main_img{ height: auto; }
+
+    /* Make admission form and inputs full width on mobile */
+    .admission_form { width: 100%; padding: 0 12px; box-sizing: border-box; }
+    .input_deg, .input_txt { width: 100%; }
+    #submit { width: 100%; }
+
+    .teacher { width: 100%; height: auto; margin-bottom: 12px; }
+
+    /* Reduce large paddings
+       (container uses bootstrap classes; keep spacing modest) */
+    .container { padding-top: 20px; }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+    .logo{ font-size: 18px; }
+    ul{ flex-direction: column; gap: 6px; align-items: flex-start; }
+    ul li a{ font-size: 15px; }
+    .img_text{ font-size: 20px; left: 6%; }
+    .label_text{ display: block; width: 100%; text-align: left; padding-bottom: 6px; }
+}
+
+.form_deg{
+    /* legacy rule kept for backward compatibility but neutralized for responsive layout */
+    padding-top: 0;
+}
+
+.label_deg{
+    /* legacy label style — avoid fixed widths which break responsive forms */
+    display: inline-block;
+    color: skyblue;
+    width: auto;
+    text-align: right;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.login_form{
+    /* neutralize previous fixed-width login form style so Bootstrap card controls layout */
+    background-color: transparent;
+    width: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.title_deg{
+    background-color: transparent;
+    color: inherit;
+    text-align: center;
+    font-weight: bold;
+    width: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 1rem;
+}
+
+.body_deg{
+    /* prefer cover and scrolling on mobile for better behavior */
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+/* Ensure background-attachment:none on mobile (some browsers ignore fixed) */
+@media (max-width: 768px) {
+    .body_deg { background-attachment: scroll; }
+}
+
+/* Login card tweaks: make the card a bit narrower on larger phones, and reduce padding on very small screens */
+.login-card {
+    max-width: 360px; /* smaller default card width */
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    /* slightly smaller on tablets/large phones */
+    .login-card { max-width: 340px; }
+}
+
+@media (max-width: 576px) {
+    /* small phones: allow card to use most of the width but keep tighter gutters */
+    .login-card {
+        max-width: calc(100% - 16px);
+        margin: 0 8px;
+    }
+    .login-card .card-body {
+        padding: 0.5rem 0.6rem;
+    }
+    .login-card .card-title { font-size: 1rem; }
+    .login-card .btn { padding: 0.45rem 0.6rem; font-size: 0.95rem; }
+}
+
+@media (max-width: 360px) {
+    /* very small phones: use almost full width with minimal gutters */
+    .login-card { max-width: calc(100% - 12px); margin: 0 6px; }
+    .login-card .card-body { padding: 0.4rem 0.45rem; }
+    .login-card .card-title { font-size: 0.95rem; }
+    .login-card .btn { padding: 0.4rem 0.55rem; font-size: 0.9rem; }
+}
+
+
+
+
+
+
